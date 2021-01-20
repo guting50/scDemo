@@ -2,7 +2,9 @@ package com.gt.feign.controller;
 
 import com.gt.feign.serverfeign.FeignServer2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @ Description：打招呼的一个对象
@@ -15,8 +17,8 @@ public class FeignController2 {
     @Autowired
     FeignServer2 feignServer2;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/sayHello2")
-    public String sayHello2(@RequestParam(value = "name") String name) {
+    @GetMapping("/sayHello2")
+    public String sayHello2(String name) {
         return feignServer2.sayHello2(name);
     }
 }

@@ -1,6 +1,6 @@
-package com.gt.server1.controller;
+package com.gt.feign.controller;
 
-import com.gt.server2.feignclient.SayHelloCaller;
+import com.gt.feign.serverfeign.FeignServer1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,17 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
-public class Person {
+public class FeignController1 {
+    //编译器报错，无视。 因为这个Bean是在程序启动的时候注入的，编译器感知不到，所以报错。
     @Autowired
-    private SayHelloCaller caller;
-
-    @GetMapping("/sayHello")
-    public String sayHello() {
-        return "server-1 " + caller.sayHello();
-    }
+    FeignServer1 feignServer1;
 
     @GetMapping("/sayHello1")
     public String sayHello1() {
-        return "server-1  hello";
+        return feignServer1.sayHello1();
     }
 }

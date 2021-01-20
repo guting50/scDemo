@@ -13,8 +13,8 @@ zuul:
     #所要访问的服务对应的注册中心的名称
     #    api-a.serviceId: server-1
     #另一种写法
-    server-1: /server/**
-    #    server-2: /server/**
+    server-1: /server1/**
+    server-2: /server2/**
     # 传统的路由
     #由传统的路由模式，我们可以知道用户访问的路由路径为localhost:10215/caller，将服务映射到了http://localhost:10213
 #    api-b-url.path: /server/**

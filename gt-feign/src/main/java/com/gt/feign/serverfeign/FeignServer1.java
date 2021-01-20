@@ -2,11 +2,9 @@ package com.gt.feign.serverfeign;
 
 import com.gt.feign.hystrix.Service1Hystrix;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Repository
 @FeignClient(value = "server-1", fallback = Service1Hystrix.class)
 public interface FeignServer1 {
 

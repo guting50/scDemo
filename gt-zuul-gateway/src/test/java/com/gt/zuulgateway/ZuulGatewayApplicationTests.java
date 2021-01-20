@@ -1,13 +1,13 @@
-package com.example.server1;
+package com.gt.zuulgateway;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Server1ApplicationTests {
+class ZuulGatewayApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+	@Test
+	void contextLoads() {
+	}
 
 }

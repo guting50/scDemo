@@ -16,3 +16,8 @@ eureka:
   instance:
     prefer-ip-address: true
 
+#打开断路器
+#feign:
+#  hystrix:
+#    enabled: true
+

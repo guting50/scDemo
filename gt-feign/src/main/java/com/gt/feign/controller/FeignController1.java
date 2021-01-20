@@ -16,7 +16,7 @@ public class FeignController1 {
     FeignServer1 feignServer1;
 
     @GetMapping("/sayHello1")
-    public String sayHello1() {
-        return feignServer1.sayHello1();
+    public String sayHello1(String name) {
+        return feignServer1.sayHello1(name);
     }
 }

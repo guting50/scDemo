@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/forezp/SpringcloudConfig/ #配置git仓库地址
+          uri: https://github.com/guting50/SpringcloudConfig/ #配置git仓库地址
           search-paths: respo #配置仓库路径
           #如果Git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写
           username: #访问git仓库的用户名

@@ -8,6 +8,7 @@ spring:
       #   dev开发环境配置文件
       #   test测试环境
       #   pro正式环境
+      name: gt-config-client-dev
       profile: dev
       label: master #配置仓库的分支
       discovery:

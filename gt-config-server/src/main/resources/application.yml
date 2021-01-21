@@ -10,7 +10,12 @@ spring:
           #如果Git仓库为公开仓库，可以不填写用户名和密码，如果是私有仓库需要填写
           username: #访问git仓库的用户名
           password: #访问git仓库的用户密码
+        native: #读取的路径为classpath下的shared目录
+          search-locations: classpath:/shared
       label: master #配置仓库的分支
+  #指定从本地读取配置
+  profiles:
+    active: native
 
 #服务端口
 server:

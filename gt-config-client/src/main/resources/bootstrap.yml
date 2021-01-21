@@ -1,12 +1,32 @@
 spring:
+  application:
+    name: gt-config-client
   cloud:
     config:
-      uri: http://localhost:10210/ #指明配置服务中心的网址。
+      #uri: http://localhost:10210/ #指明配置服务中心的网址。
       #spring.cloud.config.profile
       #   dev开发环境配置文件
       #   test测试环境
       #   pro正式环境
       profile: dev
       label: master #配置仓库的分支
+      discovery:
+        enabled: true
+        serviceId: gt-config-server
 
+
+#服务端口
+server:
+  port: 10220
+
+# 注册中心地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10211/eureka/
+    register-with-eureka: true
+    #这个必须是true fetchRegistry打开才能从eureka拉取服务列表
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
 

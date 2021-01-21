@@ -14,6 +14,6 @@ public class Controller2 {
 
     @GetMapping("/sayHello2")
     public String sayHello2(@RequestParam(value = "name", defaultValue = "gt") String name) {
-        return "hello server-2 " + name + " ,i am from port:" + port;
+        return "hello service-2 " + name + " ,i am from port:" + port;
     }
 }

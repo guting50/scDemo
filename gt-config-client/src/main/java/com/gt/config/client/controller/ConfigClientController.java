@@ -10,7 +10,7 @@ public class ConfigClientController {
     @Value("${foo}")
     String foo;
 
-    @GetMapping(value = "/hi")
+    @GetMapping(value = "/getConfig")
     public String hi() {
         return foo;
     }

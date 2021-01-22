@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: feign
+
+#服务端口
+server:
+  port: 8089
+
+# 注册中心地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:10211/eureka/
+    register-with-eureka: true
+    #这个必须是true fetchRegistry打开才能从eureka拉取服务列表
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
+
+#打开断路器
+feign:
+  hystrix:
+    enabled: true
+

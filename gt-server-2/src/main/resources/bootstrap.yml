@@ -1,23 +1,17 @@
 spring:
   application:
-    name: config-client
+    name: service-2
   cloud:
     config:
-      #uri: http://localhost:10210/ #指明配置服务中心的网址。
-      #spring.cloud.config.profile
-      #   dev开发环境配置文件
-      #   test测试环境
-      #   pro正式环境
       profile: dev
       label: master #配置仓库的分支
       discovery:
         enabled: true
         serviceId: config-server
 
-
 #服务端口
 server:
-  port: 10220
+  port: 10213
 
 # 注册中心地址
 eureka:
@@ -29,4 +23,5 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
+
 

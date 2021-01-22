@@ -1,9 +1,9 @@
 spring:
   application:
-    name: feign
+    name: service-2
 #服务端口
 server:
-  port: 8088
+  port: 10213
 
 # 注册中心地址
 eureka:
@@ -15,9 +15,4 @@ eureka:
     fetch-registry: true
   instance:
     prefer-ip-address: true
-
-#打开断路器
-feign:
-  hystrix:
-    enabled: true
 

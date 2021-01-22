@@ -15,10 +15,6 @@
     </parent>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-        </dependency>
         <!-- feign微服务调用 -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

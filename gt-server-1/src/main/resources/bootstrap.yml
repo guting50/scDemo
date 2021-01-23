@@ -11,7 +11,7 @@ spring:
 
 #服务端口
 server:
-  port: 10212
+  port: 10111
 
 # 注册中心地址
 eureka:

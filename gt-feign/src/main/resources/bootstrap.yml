@@ -11,7 +11,7 @@ spring:
 
 #服务端口
 server:
-  port: 8088
+  port: 8083
 
 # 注册中心地址
 eureka:

@@ -5,7 +5,7 @@ spring:
 
   #服务端口
 server:
-  port: 10211
+  port: 8000
 #注册中心相关配置
 # 配置关闭自我保护，并按需配置Eureka Server清理无效节点的时间间隔（5000ms）。
 eureka:
@@ -25,6 +25,6 @@ eureka:
     service-url:
       #单机 defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
       #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址（单机）。
-      defaultZone: http://localhost:10211/eureka/
+      defaultZone: http://localhost:8000/eureka/
   instance:
     prefer-ip-address: true

@@ -17,13 +17,13 @@ spring:
 
 #服务端口
 server:
-  port: 10220
+  port: 8081
 
 # 注册中心地址
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:10211/eureka/
+      defaultZone: http://localhost:8000/eureka/
     register-with-eureka: true
     #这个必须是true fetchRegistry打开才能从eureka拉取服务列表
     fetch-registry: true

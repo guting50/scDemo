@@ -1,7 +1,7 @@
 #注册中心的名字
 spring:
   application:
-    name: gt-eureka
+    name: eureka
 
   #服务端口
 server:

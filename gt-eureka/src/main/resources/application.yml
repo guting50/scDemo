@@ -2,6 +2,7 @@
 spring:
   application:
     name: gt-eureka
+
   #服务端口
 server:
   port: 10211
@@ -25,4 +26,5 @@ eureka:
       #单机 defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
       #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址（单机）。
       defaultZone: http://localhost:10211/eureka/
-  instance.prefer-ip-address: true
+  instance:
+    prefer-ip-address: true

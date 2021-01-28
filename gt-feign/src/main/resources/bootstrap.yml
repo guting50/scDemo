@@ -1,8 +1,7 @@
 spring:
-  application:
-    name: feign
   cloud:
     config:
+      name: feign
       uri: http://localhost:8089/ #指明配置服务中心的网址。
       profile: dev
       label: master #配置仓库的分支

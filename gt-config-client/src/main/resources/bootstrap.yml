@@ -1,8 +1,7 @@
 spring:
-  application:
-    name: config-client
   cloud:
     config:
+      name: config-client
       uri: http://localhost:8089/ #指明配置服务中心的网址。
       #spring.cloud.config.profile
       #   dev开发环境配置文件

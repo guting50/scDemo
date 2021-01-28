@@ -1,12 +1,10 @@
 spring:
-  application:
-    name: service-1
   cloud:
     config:
+      name: service-1 # 对应 {application} 部分
       uri: http://localhost:8089/ #指明配置服务中心的网址。
-      profile: dev
-      label: master #配置仓库的分支
+      profile: dev  # 对应 {profile} 部分
+      label: master #对应 {label} 部分，即 Git 的分支。如果配置中心使用的是本地存储，则该参数无用
       discovery:
         enabled: true
         serviceId: config-server
-

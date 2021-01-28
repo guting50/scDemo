@@ -21,3 +21,10 @@ feign:
   hystrix:
     enabled: true
 
+
+#这个是用来暴露 endpoints 的
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "hystrix.stream"

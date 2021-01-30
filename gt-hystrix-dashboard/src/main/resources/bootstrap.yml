@@ -9,7 +9,8 @@ spring:
       #   pro正式环境
       profile: dev
       label: master #配置仓库的分支
-      discovery:
-        enabled: true
-        serviceId: config-server
 
+      #通过eureka获取配置服务中心
+#      discovery:
+#        enabled: true
+#        serviceId: config-server

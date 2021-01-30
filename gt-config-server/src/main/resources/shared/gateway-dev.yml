@@ -7,6 +7,10 @@ spring:
 
     profiles:
       active: path_route
+
+  zipkin:
+    base-url: http://localhost:9411
+
   cloud:
     gateway:
       discovery:

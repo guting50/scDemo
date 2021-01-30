@@ -28,6 +28,7 @@
         <module>gt-eureka</module>
         <module>gt-feign</module>
         <module>gt-zuul-gateway</module>
+        <module>gt-gateway</module>
         <module>gt-server-1</module>
         <module>gt-server-2</module>
         <module>gt-config-server</module>
@@ -37,6 +38,9 @@
     </modules>
 
     <dependencies>
+        <!-- 部署gateway的时候需要将这个注释掉，
+        因为spring-boot-starter-web和pring-cloud-starter-gateway冲突了
+         目前没有办法在子module中排除掉parent中引入的依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

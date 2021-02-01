@@ -2,14 +2,7 @@ spring:
   cloud:
     config:
       name: config-client
-      uri: http://localhost:8089/ #指明配置服务中心的网址。
-      #spring.cloud.config.profile
-      #   dev开发环境配置文件
-      #   test测试环境
-      #   pro正式环境
+      uri: http://localhost:8089/
       profile: dev
-      label: master #配置仓库的分支
-      discovery:
-        enabled: true
-        serviceId: config-server
+      label: master
 

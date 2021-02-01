@@ -2,12 +2,7 @@ spring:
   cloud:
     config:
       name: eureka
-      uri: http://localhost:8089/ #指明配置服务中心的网址。
+      uri: http://localhost:8089/
       profile: dev
-      label: master #配置仓库的分支
-
-      #通过eureka获取配置服务中心
-#      discovery:
-#        enabled: true
-#        serviceId: config-server
+      label: master
 

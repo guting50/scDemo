@@ -36,6 +36,16 @@ eureka:
   instance:
     prefer-ip-address: true
 
+##---------------------OAuth2---------------------
+#security:
+#  oauth2:
+#    client:
+#      access-token-uri: http://localhost:${server.port}/auth/oauth/token
+#      user-authorization-uri: http://localhost:${server.port}/auth/oauth/authorize
+#      client-id: web
+#    resource:
+#      user-info-uri:  http://localhost:${server.port}/auth/javayh/member
+#      prefer-token-info: false
 
 ---
 spring:

@@ -14,10 +14,15 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableAuthorizationServer
@@ -27,6 +32,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Autowired
     RedisConnectionFactory redisConnectionFactory;
+
+    @Autowired
+    DataSource dataSource;
 
     /**
      * 用来配置客户端详情服务
@@ -54,6 +62,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
                 .scopes("server")
                 .authorities("oauth2")
                 .secret(finalSecret);
+    }
+
+    @Bean
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
     }
 
     /**

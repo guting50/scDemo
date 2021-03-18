@@ -78,3 +78,10 @@ spring:
             - Path=/feign/**
           filters:
             - StripPrefix=1
+
+        - id: gu-auth
+          uri: lb://auth
+          predicates:
+            - Path=/gu-auth/**
+          filters:
+            - StripPrefix=1

@@ -36,15 +36,16 @@ eureka:
   instance:
     prefer-ip-address: true
 
-##---------------------OAuth2---------------------
+#---------------------OAuth2---------------------
 #security:
 #  oauth2:
 #    client:
-#      access-token-uri: http://localhost:${server.port}/auth/oauth/token
-#      user-authorization-uri: http://localhost:${server.port}/auth/oauth/authorize
-#      client-id: web
+#      client-id: client_1
+#      client-secret: 123456
+#      access-token-uri: http://localhost:8090/auth/oauth/token
+#      user-authorization-uri: http://localhost:8090/auth/oauth/authorize
 #    resource:
-#      user-info-uri:  http://localhost:${server.port}/auth/javayh/member
+#      user-info-uri:  http://localhost:8090/auth/javayh/member
 #      prefer-token-info: false
 
 ---

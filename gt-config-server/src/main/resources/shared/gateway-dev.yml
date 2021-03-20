@@ -36,9 +36,20 @@ eureka:
   instance:
     prefer-ip-address: true
 
+---
+spring:
+  security:
+    user:
+      name: admin
+      password: 123456
+
+
 #---------------------OAuth2---------------------
 #security:
 #  oauth2:
+#    user:
+#      name: admin
+#      password: 123456
 #    client:
 #      client-id: client_1
 #      client-secret: 123456

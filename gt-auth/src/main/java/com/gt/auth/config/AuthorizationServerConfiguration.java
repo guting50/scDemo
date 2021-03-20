@@ -36,16 +36,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     AuthenticationManager authenticationManager;
 
     @Autowired
-    public UserDetailsService userDetailsService;
-
-    @Autowired
     RedisConnectionFactory redisConnectionFactory;
 
     @Autowired
     DataSource dataSource;
 
-    @Autowired
-    ClientDetailsService clientDetailsService;
 
     /**
      * 用来配置客户端详情服务
@@ -116,9 +111,9 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         endpoints
                 .tokenStore(tokenStore())// 令牌管理服务
                 .authenticationManager(authenticationManager)// 认证管理器
-                .userDetailsService(userDetailsService)
+//                .userDetailsService(clientDetails())
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
-                .setClientDetailsService(clientDetailsService);
+                .setClientDetailsService(clientDetails());
     }
 
     @Bean

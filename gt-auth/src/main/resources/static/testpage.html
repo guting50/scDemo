@@ -1,0 +1,40 @@
+<html>
+<head>
+</head>
+<body>
+<form class="form-signin" method="post" action="/login">
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <p>
+        <label for="username" class="sr-only">Username</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Username" required="" autofocus="">
+    </p>
+    <p>
+        <label for="password" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+    </p>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+</form>
+</body>
+<script>
+    function login() {
+        var xmlhttp;
+        if (window.XMLHttpRequest) {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        xmlhttp.open("GET", "/gu-auth/oauth/token?grant_type=password&username=" + username + "&password=" + password, true);
+        xmlhttp.send();
+        xmlhttp.onload = function () {
+            var result = xmlhttp.responseText;
+            document.getElementById("result").innerHTML = result;
+            // window.history.back(-1);
+        }
+
+    }
+</script>
+</html>

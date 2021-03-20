@@ -48,4 +48,5 @@ public class Controller1 {
 
         return oAuth2Authentication;
     }
+
 }

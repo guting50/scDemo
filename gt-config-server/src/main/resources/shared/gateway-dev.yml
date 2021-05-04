@@ -6,7 +6,7 @@ spring:
     name: gateway
 
     profiles:
-      active: path_route
+      active: gateway_route
 
   zipkin:
     base-url: http://localhost:9411
@@ -36,28 +36,6 @@ eureka:
   instance:
     prefer-ip-address: true
 
----
-spring:
-  security:
-    user:
-      name: admin
-      password: 123456
-
-
-#---------------------OAuth2---------------------
-#security:
-#  oauth2:
-#    user:
-#      name: admin
-#      password: 123456
-#    client:
-#      client-id: client_1
-#      client-secret: 123456
-#      access-token-uri: http://localhost:8090/auth/oauth/token
-#      user-authorization-uri: http://localhost:8090/auth/oauth/authorize
-#    resource:
-#      user-info-uri:  http://localhost:8090/auth/javayh/member
-#      prefer-token-info: false
 
 ---
 spring:
@@ -76,6 +54,7 @@ spring:
           #用StripPrefix的filter 在转发之前将/demo去掉
           filters:
             - StripPrefix=1
+            - RequestTime=true
 
         - id: service-2
           uri: lb://service-2
@@ -83,6 +62,8 @@ spring:
             - Path=/demo-2/**
           filters:
             - StripPrefix=1
+            - RequestTime=true
+            - TokenFilter=true
 
         - id: feign
           uri: lb://feign
@@ -90,6 +71,7 @@ spring:
             - Path=/feign/**
           filters:
             - StripPrefix=1
+            - RequestTime=true
 
         - id: gu-auth
           uri: lb://auth
@@ -97,3 +79,4 @@ spring:
             - Path=/gu-auth/**
           filters:
             - StripPrefix=1
+

@@ -20,15 +20,3 @@ eureka:
   instance:
     prefer-ip-address: true
 
-security:
-  oauth2:
-    resource:
-      #获取当前Token的用户信息
-      user-info-uri: http://localhost:8090/users/current
-    client:
-      id: client_2
-      client-secret: 123456
-      #获取Token
-      access-token-uri: http://localhost:8090/oauth/token
-      grant-type: client_credentials,password
-      scope: server

@@ -11,19 +11,6 @@ spring:
   zipkin:
     base-url: http://localhost:9411
 
-  cloud:
-    gateway:
-      discovery:
-        locator:
-          #表明gateway开启服务注册和发现的功能，
-          #并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，
-          #这个router将以服务名开头的请求路径转发到对应的服务
-          enabled: true
-          #是将请求路径上的服务名配置为小写
-          #（因为服务注册的时候，向注册中心注册时将服务名转成大写的了），
-          #比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上。
-          lowerCaseServiceId: true
-
 # 注册中心地址
 eureka:
   client:
@@ -43,7 +30,13 @@ spring:
     gateway:
       discovery:
         locator:
+          #表明gateway开启服务注册和发现的功能，
+          #并且spring cloud gateway自动根据服务发现为每一个服务创建了一个router，
+          #这个router将以服务名开头的请求路径转发到对应的服务
           enabled: false
+          #是将请求路径上的服务名配置为小写
+          #（因为服务注册的时候，向注册中心注册时将服务名转成大写的了），
+          #比如以/service-hi/*的请求路径被路由转发到服务名为service-hi的服务上。
           lowerCaseServiceId: true
       routes:
         - id: service-1
@@ -51,41 +44,33 @@ spring:
           uri: lb://service-1
           predicates:
             - Path=/demo-1/**
-          #用StripPrefix的filter 在转发之前将/demo去掉
-          filters:
-            - StripPrefix=1
-            - RequestTime=true
 
         - id: service-2
           uri: lb://service-2
           predicates:
             - Path=/demo-2/**
           filters:
-            - StripPrefix=1
-            - RequestTime=true
             - TokenFilter=true
 
-        - id: feign2 # /feign/sayHello2 需要Token
+        # /feign/sayHello2 需要Token
+        - id: feign2
           uri: lb://feign
           predicates:
             - Path=/feign/sayHello2
           filters:
-            - StripPrefix=1
-            - RequestTime=true
             - TokenFilter=true
 
         - id: feign
           uri: lb://feign
           predicates:
             - Path=/feign/**
-          filters:
-            - StripPrefix=1
-            - RequestTime=true
 
-        - id: gu-auth
-          uri: lb://auth
-          predicates:
-            - Path=/gu-auth/**
-          filters:
-            - StripPrefix=1
+      #添加一个过滤器去应用在所有的路由上
+      default-filters:
+        #通过配置parts来表示截断路径前缀的数量 用StripPrefix的filter 在转发之前将/demo去掉
+        - StripPrefix=1
+        # 自定义过滤器，打印请求响应时间
+        - RequestTime=true
+
+
 

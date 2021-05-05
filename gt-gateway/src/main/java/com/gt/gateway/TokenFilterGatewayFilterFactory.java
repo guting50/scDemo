@@ -33,7 +33,9 @@ public class TokenFilterGatewayFilterFactory extends AbstractGatewayFilterFactor
             if (config.isWithParams()) {
                 String token = exchange.getRequest().getQueryParams().getFirst("token");
                 if (token == null || token.isEmpty()) {
-                    log.info("token is empty...");
+                    StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
+                            .append(": token is empty...");
+                    log.info(sb.toString());
                     exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
                     return exchange.getResponse().setComplete();
                 }

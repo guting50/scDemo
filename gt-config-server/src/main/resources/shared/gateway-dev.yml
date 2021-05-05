@@ -65,6 +65,15 @@ spring:
             - RequestTime=true
             - TokenFilter=true
 
+        - id: feign2 # /feign/sayHello2 需要Token
+          uri: lb://feign
+          predicates:
+            - Path=/feign/sayHello2
+          filters:
+            - StripPrefix=1
+            - RequestTime=true
+            - TokenFilter=true
+
         - id: feign
           uri: lb://feign
           predicates:

@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    config:
+      name: sso-server
+      uri: http://localhost:8089/
+      profile: dev
+      label: master
+

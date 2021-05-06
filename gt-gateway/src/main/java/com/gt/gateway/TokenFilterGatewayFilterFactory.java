@@ -8,13 +8,16 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.autoconfigure.http.HttpMessageConverters;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,20 +43,11 @@ public class TokenFilterGatewayFilterFactory extends AbstractGatewayFilterFactor
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             if (config.isWithParams()) {
-//                String token = exchange.getRequest().getQueryParams().getFirst("accessToken");
-//                if (token == null || token.isEmpty()) {
-//                    StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
-//                            .append(": accessToken is empty...");
-//                    log.info(sb.toString());
-//                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-//                    return exchange.getResponse().setComplete();
-//                }
-
                 //访问路径
-                String url = exchange.getRequest().getURI().toString();
+                String url = ((LinkedHashSet) exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR)).toArray()[0].toString();
                 String redirectUrl = ssoFeign.hasKeyAndRedirect("accessToken");
                 if (!StringUtils.isEmpty(redirectUrl)) {
-                    StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
+                    StringBuilder sb = new StringBuilder(url)
                             .append(": accessToken is empty...");
                     log.info(sb.toString());
 

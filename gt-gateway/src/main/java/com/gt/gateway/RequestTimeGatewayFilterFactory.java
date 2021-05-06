@@ -4,10 +4,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
+import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Component
@@ -35,7 +37,9 @@ public class RequestTimeGatewayFilterFactory extends AbstractGatewayFilterFactor
                     Mono.fromRunnable(() -> {
                         Long startTime = exchange.getAttribute(REQUEST_TIME_BEGIN);
                         if (startTime != null) {
-                            StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
+                            String url = ((LinkedHashSet) exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR)).toArray()[0].toString();
+                            String urla = exchange.getRequest().getURI().getRawPath();
+                            StringBuilder sb = new StringBuilder(url)
                                     .append(": ")
                                     .append(System.currentTimeMillis() - startTime)
                                     .append("ms");

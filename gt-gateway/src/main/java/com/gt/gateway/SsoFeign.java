@@ -17,6 +17,6 @@ public interface SsoFeign {
      * 判断key是否存在,如果不存在，则跳转到登录页面
      */
     @RequestMapping("redis/hasKeyAndRedirect")
-    public Boolean hasKeyAndRedirect(@RequestParam(value = "key") String key, @RequestParam(value = "url") String url);
+    public String hasKeyAndRedirect(@RequestParam(value = "key") String key);
 
 }

@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -50,13 +51,16 @@ public class TokenFilterGatewayFilterFactory extends AbstractGatewayFilterFactor
 
                 //访问路径
                 String url = exchange.getRequest().getURI().toString();
-                if (!ssoFeign.hasKeyAndRedirect("accessToken", url)) {
+                String redirectUrl = ssoFeign.hasKeyAndRedirect("accessToken");
+                if (!StringUtils.isEmpty(redirectUrl)) {
                     StringBuilder sb = new StringBuilder(exchange.getRequest().getURI().getRawPath())
                             .append(": accessToken is empty...");
                     log.info(sb.toString());
 
-                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
-//                    exchange.getResponse().sendRedirect("http://localhost:10110/sso/loginPage?url=" + url);
+//                    exchange.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED);
+
+                    exchange.getResponse().setStatusCode(HttpStatus.SEE_OTHER);
+                    exchange.getResponse().getHeaders().set("Location", redirectUrl + url);
                     return exchange.getResponse().setComplete();
                 }
             }

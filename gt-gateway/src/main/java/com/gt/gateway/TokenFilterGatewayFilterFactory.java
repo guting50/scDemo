@@ -10,10 +10,12 @@ import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.factory.AbstractGatewayFilterFactory;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.server.ServerHttpRequest;
 import org.springframework.stereotype.Component;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 
 import java.util.Arrays;
@@ -43,9 +45,23 @@ public class TokenFilterGatewayFilterFactory extends AbstractGatewayFilterFactor
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
             if (config.isWithParams()) {
+
+                String accessToken = exchange.getRequest().getQueryParams().getFirst("accessToken");
+                MultiValueMap<String, HttpCookie> cookies = exchange.getRequest().getCookies();
+                if (null != cookies) {
+                    for (String key : cookies.keySet()) {
+                        if ("accessToken".equals(key)) {
+                            accessToken = cookies.getFirst(key).getValue();
+                        }
+                    }
+                }
+
+                if (StringUtils.isEmpty(accessToken)) {
+                    accessToken = "";
+                }
+                String redirectUrl = ssoFeign.hasKeyAndRedirect(accessToken);
                 //访问路径
                 String url = ((LinkedHashSet) exchange.getAttribute(ServerWebExchangeUtils.GATEWAY_ORIGINAL_REQUEST_URL_ATTR)).toArray()[0].toString();
-                String redirectUrl = ssoFeign.hasKeyAndRedirect("accessToken");
                 if (!StringUtils.isEmpty(redirectUrl)) {
                     StringBuilder sb = new StringBuilder(url)
                             .append(": accessToken is empty...");

@@ -63,7 +63,7 @@ public class UserController {
             //用户名+时间戳（这里只是demo，正常项目的令牌应该要更为复杂）
             flag = username + System.currentTimeMillis();
             //令牌作为key，存用户id作为value（或者直接存储可暴露的部分用户信息也行）设置过期时间（我这里设置3分钟）
-            template.opsForValue().set("accessToken", flag, (long) (3 * 60), TimeUnit.SECONDS);
+            template.opsForValue().set(flag, "1", (long) (3 * 60), TimeUnit.SECONDS);
         }
         return flag;
     }

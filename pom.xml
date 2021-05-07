@@ -27,14 +27,17 @@
     <modules>
         <module>gt-eureka</module>
         <module>gt-feign</module>
-        <module>gt-zuul-gateway</module>
         <module>gt-gateway</module>
         <module>gt-server-1</module>
         <module>gt-server-2</module>
         <module>gt-config-server</module>
-        <module>gt-config-client</module>
         <module>gt-hystrix-dashboard</module>
         <module>gt-turbine</module>
+        <module>gt-sso-server</module>
+
+
+        <module>gt-config-client</module>
+        <module>gt-zuul-gateway</module>
     </modules>
 
     <dependencies>

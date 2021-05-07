@@ -1,5 +1,7 @@
 package com.gt.sso.controller;
 
+import com.gt.sso.service.UserService;
+import com.gt.sso.vo.User;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -23,6 +25,8 @@ import java.util.concurrent.TimeUnit;
 public class UserController {
     @Autowired
     private StringRedisTemplate template;
+    @Autowired
+    UserService userService;
 
     /**
      * 判断key是否存在
@@ -59,7 +63,9 @@ public class UserController {
     private String checkUsernameAndPassword(String username, String password) {
         //通行令牌
         String flag = null;
-        if ("admin".equals(username) && "123456".equals(password)) {
+        User user = userService.login(username);
+
+        if (user != null && user.getPassword().equals(password)) {
             //用户名+时间戳（这里只是demo，正常项目的令牌应该要更为复杂）
             flag = username + System.currentTimeMillis();
             //令牌作为key，存用户id作为value（或者直接存储可暴露的部分用户信息也行）设置过期时间（我这里设置3分钟）

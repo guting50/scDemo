@@ -5,6 +5,32 @@ spring:
   zipkin:
     base-url: http://localhost:9411
 
+  redis:
+    host: 127.0.0.1
+    database: 0
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/gt_user?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&serverTimezone=UTC
+    username: root
+    password: guting123
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      initialSize: 5
+      minIdle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 from DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: false
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,log4j
+      connectionProperties: 'druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000'
+
+
 #服务端口
 server:
   port: 10110
@@ -20,3 +46,16 @@ eureka:
   instance:
     prefer-ip-address: true
 
+mybatis:
+  type-aliases-package: com.javayh.entity
+  configuration:
+    map-underscore-to-camel-case: true  #开启驼峰命名,l_name -> lName
+    jdbc-type-for-null: NULL
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: true
+    cache-enabled: true #开启二级缓存
+    call-setters-on-nulls: true #map空列不显示问题
+  mapper-locations:
+    - classpath:mybatis/*.xml
+
+logging.level.org.springframework.security: DEBUG

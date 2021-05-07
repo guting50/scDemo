@@ -58,4 +58,6 @@ mybatis:
   mapper-locations:
     - classpath:mybatis/*.xml
 
-logging.level.org.springframework.security: DEBUG
+#打印sql
+logging:
+  level.com.*: debug
